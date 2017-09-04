@@ -55,9 +55,9 @@ public class Login extends HttpServlet {
                     if(senha.equalsIgnoreCase(rs.getString("senha"))){
                         HttpSession session = request.getSession();
                         session.setAttribute("login", login);
-                        session.setAttribute("codUsuario", rs.getString("cod_usuario"));
+                        session.setAttribute("codUsuario", rs.getString("id_usuario"));
                         out.println("<script language= 'JavaScript'>");
-                            out.println("location.href='agenda.html'");
+                            out.println("location.href='logado.html'");
                         out.println("</script>");
                     }else{
                         out.println("<h1>Senha Inválida</h1>");
