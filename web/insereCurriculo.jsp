@@ -3,7 +3,7 @@
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    if(request.getParameter("nome") != null){
+    if(request.getParameter("login") != null){
         String nome = request.getParameter("nome");
         String telefone = request.getParameter("telefone");
         String celular = request.getParameter("celular");
