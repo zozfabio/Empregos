@@ -3,7 +3,19 @@
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    if(request.getParameter("nome") != null){
+    if(request.getParameter("BtnCadastraFormacao") != null){
+        String nome = request.getParameter("nome_formacao");
+        String cursando = request.getParameter("status");
+        String instituicao = request.getParameter("instituicao");
+        String data_inicio = request.getParameter("data_inicio_formacao");
+        String data_final = request.getParameter("data_termino_formacao");
+        try{
+            ConexaoBanco.getConect().setDados("INSERT INTO formacao(nome,cursando,instituicao,data_inicio,data_final,id_curriculo) "
+             + "VALUES('"+nome+"','"+cursando+"','"+instituicao+"','"+data_inicio+"','"+data_final+"',1)");
+        }catch(Exception e){
+            out.println("Erro ao incluir Formação!");
+        }
+    }else if(request.getParameter("BtnCadastra") != null){
         String nome = request.getParameter("nome");
         String telefone = request.getParameter("telefone");
         String celular = request.getParameter("celular");
@@ -88,8 +100,30 @@
                 <br />
                 Email:  <br /> <input type="text" name="email" maxlength="100" size="100" />
                 <br />
-                Formação/Conhecimentos: <br /> <textarea name="formacao" rows="10" cols="100"></textarea>
+                <br /> 
+                
+                
+                
+                Formação/Conhecimentos: <br /> 
+                Nome Formação: <input type="text" name="nome_formacao" maxlength="100" size="50" />
+                <br /> 
+                Status:  
+                <select name='status'>
+                    <option value='completo'>Completo</option>
+                    <option value='cursando'>Cursando</option>
+                    <option value='incompleto'>Incompleto</option>
+                </select>
+                <br /> 
+                Instituição: <input type="text" name="instituicao" maxlength="100" size="50" />
+                <br /> 
+                Data Início: <input type="text" name="data_inicio_formacao" maxlength="100" size="20" />
+                Data Término: <input type="text" name="data_termino_formacao" maxlength="100" size="20" />
                 <br />
+                <input type="submit" name="BtnCadastraFormacao" value="CadastrarFormacao"  />
+                <br /><br />
+                
+                
+                
                 Atividades Complementares: <br /> <textarea name="atividades" rows="10" cols="100"></textarea>
                 <br />
                 Outras Informações: <br /> <textarea name="outros" rows="5" cols="100"></textarea>
