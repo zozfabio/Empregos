@@ -1,8 +1,7 @@
-
-package modelo;
-
+package br.edu.unidavi.empregabilidade.model;
 
 public class Estado {
+
     private String est_sigla;
     private String nome;
 
@@ -26,6 +25,5 @@ public class Estado {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
-    
+
 }

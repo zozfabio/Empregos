@@ -18,12 +18,12 @@ public class ConexaoBanco {
     private static Connection con;  
     private static boolean conectado;
     private static String usuario = "root";
-    private static String senha = "1234";
+    private static String senha = "";
     private static String banco = "empregos";
     private static String host = "localhost";
     private static String driver = "com.mysql.jdbc.Driver";
     private String user;
-    private static String url = "jdbc:mysql://"+host+":3306/"+banco;
+    private static String url = "jdbc:mysql://"+host+":3307/"+banco;
     private static ConexaoBanco conect = null;
     
     public ConexaoBanco(String Url, String Usuario, String Senha) {

@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package modelo;
+package br.edu.unidavi.empregabilidade.model;
 
 import fontes.ConexaoBanco;
 import java.io.IOException;
@@ -33,14 +28,14 @@ public class Login extends HttpServlet {
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
         ConexaoBanco.conectarPrimeiraVez();
-        
+
         response.setContentType("text/html;charset=UTF-8");
-        
+
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Empregos Alto Vale</title>");    
+            out.println("<title>Empregos Alto Vale</title>");
             out.println("<meta name='viewport' content='width=device-width, initial-scale=1.0'>");
             out.println("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css'>");
             out.println("</head>");
@@ -49,27 +44,27 @@ public class Login extends HttpServlet {
             out.println("<div class='row' style='width: 600px; text-align: center;'>");
             out.println("<div class='row' style='width: 620px;'>");
             out.println("<img src='img/EmpregosAltoVale2.png' width=\"300\"> ");
-            try{
-                java.sql.ResultSet rs = ConexaoBanco.getConect().getDados("SELECT * FROM usuario WHERE login = '"+login+"'");
-                if(rs.next()){
-                    if(senha.equalsIgnoreCase(rs.getString("senha"))){
+            try {
+                java.sql.ResultSet rs = ConexaoBanco.getConect().getDados("SELECT * FROM usuario WHERE login = '" + login + "'");
+                if (rs.next()) {
+                    if (senha.equalsIgnoreCase(rs.getString("senha"))) {
                         HttpSession session = request.getSession();
                         session.setAttribute("login", login);
                         session.setAttribute("codUsuario", rs.getString("id_usuario"));
                         out.println("<script language= 'JavaScript'>");
-                            out.println("location.href='logado.html'");
+                        out.println("location.href='logado.html'");
                         out.println("</script>");
-                    }else{
+                    } else {
                         out.println("<h1>Senha Inválida</h1>");
                     }
-                }else{
+                } else {
                     out.println("<h1 style=\"font-size: 36px;color: #616161;\">Login Inválido!</h1>");
                 }
 
-            }catch(Exception e){e.printStackTrace();}
-            
-            
-            
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             out.println("    </div>");
             out.println("</div>");
             out.println("<div class='row' style='width: 600px; text-align: center;'>");
@@ -79,7 +74,7 @@ public class Login extends HttpServlet {
             out.println("        </a>");
             out.println("    </div>");
             out.println("</div>");
-                            
+
             out.println("</body>");
             out.println("</html>");
         }

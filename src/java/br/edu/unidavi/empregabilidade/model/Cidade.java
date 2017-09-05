@@ -1,8 +1,7 @@
-
-package modelo;
-
+package br.edu.unidavi.empregabilidade.model;
 
 public class Cidade {
+
     private String est_sigla;
     private String nome;
 
@@ -26,6 +25,5 @@ public class Cidade {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
-    
+
 }
