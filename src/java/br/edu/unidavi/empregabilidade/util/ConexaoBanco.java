@@ -1,8 +1,4 @@
-/**
- * @author Ricardo Fronza
- */
-
-package fontes;
+package br.edu.unidavi.empregabilidade.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,15 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
 public class ConexaoBanco {
     
     private Statement stmt;
     private ResultSet rs;
     private static Connection con;  
     private static boolean conectado;
-    private static String usuario = "root";
-    private static String senha = "";
+    private static String usuario = "marcondes";
+    private static String senha = "socdconde";
     private static String banco = "empregos";
     private static String host = "localhost";
     private static String driver = "com.mysql.jdbc.Driver";
@@ -93,7 +88,7 @@ public class ConexaoBanco {
     }
     
     public static void conectarPrimeiraVez() {
-        conect = new ConexaoBanco("jdbc:mysql://localhost:3306/empregos", "root", "1234");
+        conect = new ConexaoBanco("jdbc:mysql://localhost:3307/empregos", "marcondes", "socdconde");
         conect.conectar();
     }
     

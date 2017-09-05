@@ -1,53 +1,25 @@
-
-<%@page import="fontes.ConexaoBanco"%>
+<%@page import="br.edu.unidavi.empregabilidade.util.ConexaoBanco"%>
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-    if(request.getParameter("login") != null){
-        String nome = request.getParameter("nome");
-        String cpfCnpj = request.getParameter("cpf_cnpj");
-        String telefone = request.getParameter("telefone");
-        String celular = request.getParameter("celular");
-        String whatsapp = request.getParameter("whatsapp");
-        String email = request.getParameter("email");
-        String endereco = request.getParameter("endereco");
-        String usuario = request.getParameter("login");
-        String senha = request.getParameter("senha");
-        String cidade = request.getParameter("cidade");
-        String fisicaJuridica = request.getParameter("fisicaJuridica");
-        if(fisicaJuridica.equalsIgnoreCase("FISICA")){
-            fisicaJuridica = "FISICA";
-        }else{
-            fisicaJuridica = "JURIDICA";
-        }
-        java.sql.ResultSet rs3 = ConexaoBanco.getConect().getDados("SELECT id_cidade FROM cidade WHERE nome = '"+cidade+"'");
-        rs3.next();
-        int idCidade = rs3.getInt(1);
-        try{
-            ConexaoBanco.getConect().setDados("INSERT INTO usuario(usuario,senha) VALUES('"+usuario+"','"+senha+"')");
-            java.sql.ResultSet rs4 = ConexaoBanco.getConect().getDados("SELECT id_usuario FROM usuario WHERE usuario = '"+usuario+"'");
-            rs4.next();
-            int idUsuario = rs4.getInt(1);
-            ConexaoBanco.getConect().setDados("INSERT INTO pessoa(id_pessoa,nome,cpf_cnpj,telefone,celular,whatsapp,email,endereco,id_cidade,pessoa_fisica,endereco_imagem) "
-             + "VALUES("+idUsuario+",'"+nome+"','"+cpfCnpj+"','"+telefone+"','"+celular+"','"+whatsapp+"','"+email+"','"+endereco+"',"+idCidade+",'"+fisicaJuridica+"','pessoa.jpg')");
-            out.println("<script language= 'JavaScript'>");
-                out.println("location.href='index.html'");
-            out.println("</script>");
-        }catch(Exception e){
-            out.println("Erro ao incluir Usuário!");
-        }
-    }
-%>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Criar Usuário</title>
+        <title>Empregos Alto Vale - Criar Usuário</title>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css" />
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
     </head>
     <body style="background-color: #cfd8dc;">
-    <!body style="background-image: url('img/fundoAzul.jpg');">
-        <br />
-        <div>
+        <div class="container">
             <div>
                 <br />
                 <img src="img/EmpregosAltoVale2.png" width="500">
@@ -82,20 +54,23 @@
                 <select name='cidade'>
                     <%
                         java.sql.ResultSet rs = ConexaoBanco.getConect().getDados("SELECT nome FROM cidade");
-                        while(rs.next()){
-                            out.println("<option value='"+rs.getString(1)+"'>"+rs.getString(1)+"</option>");
+                        while (rs.next()) {
+                            out.println("<option value='" + rs.getString(1) + "'>" + rs.getString(1) + "</option>");
                         }
                     %>
                 </select>
                 <br />
                 <div  >
-                    <input type="submit" name="BtnCadastra" value="Cadastrar"  />
+                    <input type="submit" class="btn btn-success" name="BtnCadastra" value="Cadastrar"  />
                     <a href="index.html" target="_parent">
-                        <button type="button" >Cancelar</button>
+                        <button class="btn red darken-4" type="button" >Cancelar</button>
                     </a>
                 </div>
             </form>
-            
         </div>
+                
+        <br />
+        <%@include file="templates/footer.html" %>
+
     </body>
 </html>

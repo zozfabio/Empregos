@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,22 +9,12 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css" />
-        
-        <!-- Latest compiled and minified CSS -->
-       <!--  <link rel="stylesheet" href="css/bootstrap.min.css" crossorigin="anonymous">
-
-        <!-- Latest compiled and minified JavaScript -->
-       <!--  <script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
-
-        <!--Let browser know website is optimized for mobile-->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        
-    </head>
-    <body style="background-image: url('img/fundo22.png');">
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
-        
+
+    </head>
+    <body style="background-image: url('img/fundo22.png');">
         <div class="row" style="width: 100%;"> <!DIV Página Inteira >
             <div class="row" style="width: 100%; height: 85px; background-color: #cfd8dc">
                 <div class="row" style="width: 1200px; height: 85px;">
@@ -36,7 +27,7 @@
 
                     <form class="col s4" name="form1" method="post" action="Login" style="text-align: center; position: relative;transform: translateY(-10%);">
                         <div class="input-field col s4">
-                          Login: <input id="first_name" type="text" name="login" class="validate grey lighten-5" style="height: 25px;width: 120px;">
+                            Login: <input id="first_name" type="text" name="login" class="validate grey lighten-5" style="height: 25px;width: 120px;">
                         </div>
                         <div class="input-field col s4" >
                             Senha: <input id="last_name" type="password" name="senha" class="validate grey lighten-5" style="height: 25px;width: 120px;">
@@ -54,8 +45,8 @@
                     </form>
                 </div>
             </div>
-            
-            
+
+
             <div class="row" style="text-align: center; position: relative;transform: translateY(-6.4%);">
                 <div class="col s12" style="width: 100%;height: 500px; text-align: center;background-image: url('img/fundo2.jpg');background-size: 100%;">
                     <div class="col s6" style="width: 500;height:300px;text-align:center;position:absolute;left:50%;top:50%;margin-left:-500px; margin-top:-150px;background-color:#FFFFFF;opacity:0.65;">
@@ -89,14 +80,14 @@
                     </div>
                 </div>
             </div>
-            
-            
+
+
             <div class="row" style="height: 300px;text-align: center; position: relative;transform: translateY(-17.5%);text-align: center;background-color: #eeeeee;">
                 <div class="col s6" style="">
                     <p style="font-size: 36px;color: #616161;transform:translateY(10%);">Cadastre seu Currículo:</p>
                     <p class="col s2"></p>
                     <p class="col s8" style="font-size: 18px;color: #616161;transform:translateY(-30%);">Cadastre seu Currículo online e seja visto pelas empresas da região do Alto Vale
-                    do Itajaí, temos mais de 100 emoresas parceiras que consultam regularmente nosso banco de currículos em busca de profissionais.</p>
+                        do Itajaí, temos mais de 100 emoresas parceiras que consultam regularmente nosso banco de currículos em busca de profissionais.</p>
                     <div class="input-field col s12" style="transform: translateY(-90%);">
                         <a href="insereCurriculo.jsp">
                             <button class="btn waves-effect light-blue" type="submit" name="botao" style="transform: translateY(15%);">Cadastrar
@@ -109,7 +100,7 @@
                     <p style="font-size: 36px;color: #616161;transform:translateY(10%);">Empresa, cadastre sua vaga:</p>
                     <p class="col s2"></p>
                     <p class="col s8" style="font-size: 18px;color: #616161;transform:translateY(-30%);">Cadastre a vaga que sua empresa necessita, temos mais de 5 mil currículos cadastrados
-                     em nosso site, aqui você vai encontrar o profissional certo que sua empresa estava procurando.</p>
+                        em nosso site, aqui você vai encontrar o profissional certo que sua empresa estava procurando.</p>
                     <div class="input-field col s12" style="transform: translateY(-90%);">
                          <button class="btn waves-effect light-blue" type="submit" name="botao" style="transform: translateY(15%);">Cadastrar
                             <i class="material-icons right">send</i>
@@ -117,14 +108,11 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
-        
-        <footer>
-            <div class="row" style="height: 50px;text-align: center; position: relative;transform: translateY(-80%);text-align: center;background-color: #eeeeee;">
-                <p style="font-size: 18px;color: #616161;transform:translateY(50%);">Home   -   Vagas   -   Empresa   -   Login   -   Contato   -   Sobre</p>
-            </div>
-        </footer>
+
+        <br />
+        <%@include file="templates/footer.html" %>
     </body>
-    
+
 </html>

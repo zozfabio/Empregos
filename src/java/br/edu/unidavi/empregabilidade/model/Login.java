@@ -1,6 +1,6 @@
 package br.edu.unidavi.empregabilidade.model;
 
-import fontes.ConexaoBanco;
+import br.edu.unidavi.empregabilidade.util.ConexaoBanco;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
