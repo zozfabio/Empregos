@@ -1,7 +1,17 @@
 <%@page import="br.edu.unidavi.empregabilidade.util.ConexaoBanco"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="br.edu.unidavi.empregabilidade.model.Pessoa"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%
+    if(request.getParameter("login") != null){
+        try{
+            Pessoa pessoa = new Pessoa(request.getParameter("nome"), request.getParameter("cpf_cnpj"), request.getParameter("telefone"), request.getParameter("celular"), 
+                    request.getParameter("whatsapp"), request.getParameter("email"), request.getParameter("endereco"), request.getParameter("login"), request.getParameter("senha"), 
+                    request.getParameter("cidade"), request.getParameter("fisicaJuridica"));
+            pessoa.inserePessoa();
+        }catch(Exception e){}
+    }
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,7 +37,7 @@
             </div>
             <form name="CadastroUsuario" method="post">
                 Pessoa Física ou Jurídica?: 
-                <select name='fisicaJuridica'>
+                <select name='fisicaJuridica' class="browser-default">
                     <option value='FISICA'>FISICA</option>
                     <option value='JURIDICA'>JURIDICA</option>
                 </select>
@@ -51,18 +61,21 @@
                 Endereço: <input type="text" name="endereco" maxlength="200" size="80" />
                 <br />
                 Cidade: 
-                <select name='cidade'>
+                <select name='cidade' class="browser-default">
                     <%
-                        java.sql.ResultSet rs = ConexaoBanco.getConect().getDados("SELECT nome FROM cidade");
-                        while (rs.next()) {
-                            out.println("<option value='" + rs.getString(1) + "'>" + rs.getString(1) + "</option>");
-                        }
+                        try{
+                            java.sql.ResultSet rs = ConexaoBanco.getConect().getDados("SELECT nome FROM cidade");
+                            while (rs.next()) {
+                                out.println("<option value='"+rs.getString("nome")+"'>"+rs.getString("nome")+"</option>");
+                            }
+                        }catch(Exception e){}
                     %>
                 </select>
                 <br />
-                <div  >
+                <br />
+                <div>
                     <input type="submit" class="btn btn-success" name="BtnCadastra" value="Cadastrar"  />
-                    <a href="index.html" target="_parent">
+                    <a href="index.jsp" target="_parent">
                         <button class="btn red darken-4" type="button" >Cancelar</button>
                     </a>
                 </div>
