@@ -1,82 +1,59 @@
 
 <%@page import="fontes.ConexaoBanco"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="br.edu.unidavi.empregabilidade.model.Curriculo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    if(request.getParameter("BtnCadastraFormacao") != null){
-        String nome = request.getParameter("nome_formacao");
-        String cursando = request.getParameter("status");
-        String instituicao = request.getParameter("instituicao");
-        String data_inicio = request.getParameter("data_inicio_formacao");
-        String data_final = request.getParameter("data_termino_formacao");
+    if(request.getParameter("BtnCadastra") != null){
         try{
-            ConexaoBanco.getConect().setDados("INSERT INTO formacao(nome,cursando,instituicao,data_inicio,data_final,id_curriculo) "
-             + "VALUES('"+nome+"','"+cursando+"','"+instituicao+"','"+data_inicio+"','"+data_final+"',1)");
-        }catch(Exception e){
-            out.println("Erro ao incluir Formação!");
-        }
-    }else if(request.getParameter("BtnCadastra") != null){
-        String nome = request.getParameter("nome");
-        String telefone = request.getParameter("telefone");
-        String celular = request.getParameter("celular");
-        String whatsapp = request.getParameter("whatsapp");
-        String endereco = request.getParameter("endereco");
-        String cidade = request.getParameter("cidade");
-        String nacionalidade = request.getParameter("nacionalidade");
-        String nascimento = request.getParameter("nascimento");
-        String civil = request.getParameter("civil");
-        String genero = request.getParameter("genero");
-        String email = request.getParameter("email");
-        String formacao = request.getParameter("formacao");
-        String atividades = request.getParameter("atividades");
-        String outros = request.getParameter("outros");
-        java.sql.ResultSet rs3 = ConexaoBanco.getConect().getDados("SELECT id_cidade FROM cidade WHERE nome = '"+cidade+"'");
-        rs3.next();
-        int idCidade = rs3.getInt(1);
-        try{
-            
-            ConexaoBanco.getConect().setDados("INSERT INTO curriculo(nome_completo,telefone,celular,whatsapp,endereco,id_cidade,nacionalidade,nascimento,civil,genero,email,"
-                    + "formacao,atividades_complementares,outras_informacoes,id_pessoa) "
-             + "VALUES('"+nome+"','"+telefone+"','"+celular+"','"+whatsapp+"','"+endereco+"',"+idCidade+",'"+nacionalidade+"','"+nascimento+"','"+civil+"','"+genero+"',"
-                     + "'"+email+"','"+formacao+"','"+atividades+"','"+outros+"',1)");
-            out.println("<script language= 'JavaScript'>");
-                out.println("location.href='index.html'");
-            out.println("</script>");
-        }catch(Exception e){
-            out.println("Erro ao incluir Currículo!");
-        }
+            Curriculo curriculo = new Curriculo(request.getParameter("nome"), request.getParameter("telefone"), request.getParameter("celular"), 
+                    request.getParameter("whatsapp"), request.getParameter("endereco"), request.getParameter("cidade"), request.getParameter("nacionalidade"), 
+                    request.getParameter("idade"),request.getParameter("civil"),request.getParameter("genero"),request.getParameter("email"), 
+                    request.getParameter("formacao"), request.getParameter("atividades"), request.getParameter("outros"),
+                    1);//ALTERAR AQUI PARA PEGAR O ID DA PESSOA QUE ESTÁ LOGADO
+            curriculo.insereCurriculo();
+        }catch(Exception e){}
     }
 %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Inserir Currículo</title>
-    </head>
+        <title>Empregos Alto Vale - Inserir Currículo</title>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css" />
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+    </head> 
     <body style="background-color: #cfd8dc;">
     <!body style="background-image: url('img/fundoAzul.jpg');">
         <br />
-        <div>
-            <div>
-                <br />
-                <img src="img/EmpregosAltoVale2.png" width="500">
+        <div class="container">
+            <div class="col l12 s12 center"> 
+                <img src="img/temos.png" width="300">
                 <h1 style="font-size: 36px;">Inserir Currículo</h1>
             </div>
-            <form name="CadastroUsuario" method="post">
+            <form name="CadastroCurriculo" method="post">
                 
                 <br />
-                Nome Completo: <br />  <input type="text" name="nome" maxlength="100" size="100" />
+                <b>Nome Completo:</b> <br />  <input class="blue-grey lighten-5" type="text" name="nome" maxlength="100" size="100" />
                 <br />
-                Telefone: <br />  <input type="text" name="telefone" maxlength="100" size="100" />
+                <b>Telefone:</b> <br />  <input class="blue-grey lighten-5" type="text" name="telefone" maxlength="100" size="100" />
                 <br />
-                Celular:  <br /> <input type="text" name="celular" maxlength="100" size="100" />
+                <b>Celular:</b>  <br /> <input class="blue-grey lighten-5" type="text" name="celular" maxlength="100" size="100" />
                 <br />
-                WhatsApp: <br />  <input type="text" name="whatsapp" maxlength="100" size="100" />
+                <b>WhatsApp:</b> <br />  <input class="blue-grey lighten-5" type="text" name="whatsapp" maxlength="100" size="100" />
                 <br />
-                Endereço:  <br /> <input type="text" name="endereco" maxlength="200" size="100" />
+                <b>Endereço:</b>  <br /> <input class="blue-grey lighten-5" type="text" name="endereco" maxlength="200" size="100" />
                 <br />
-                Cidade:  <br /> 
-                <select name='cidade'>
+                <b>Cidade:</b>  <br /> 
+                <select name='cidade' class="browser-default blue-grey lighten-5">
                     <%
                         java.sql.ResultSet rs = ConexaoBanco.getConect().getDados("SELECT nome FROM cidade");
                         while(rs.next()){
@@ -85,26 +62,41 @@
                     %>
                 </select>
                 <br />
-                Nacionalidade:  <br /> <input type="text" name="nacionalidade" maxlength="100" size="100" />
+                <b>Nacionalidade:</b>  <br /> <input class="blue-grey lighten-5" type="text" name="nacionalidade" maxlength="100" size="100" />
                 <br />
-                Nascimento: <br />  <input type="text" name="nascimento" maxlength="100" size="100" />
+                <b>Idade:</b> <br />  <input class="blue-grey lighten-5" type="text" name="idade" maxlength="100" size="100" />
                 <br />
-                Estado Civil: <br />  <input type="text" name="civil" maxlength="100" size="100" />
+                <b>Estado Civil:</b> <br />  <input class="blue-grey lighten-5" type="text" name="civil" maxlength="100" size="100" />
                 <br />
-                Gênero:  <br /> 
-                <select name='genero'>
-                    <option value='masculino'>Masculino</option>
-                    <option value='masculino'>Feminino</option>
-                    <option value='masculino'>Outro</option>
+                <b>Gênero:</b>  <br /> 
+                <select name='genero' class="browser-default blue-grey lighten-5">
+                    <option value='Masculino'>Masculino</option>
+                    <option value='Feminino'>Feminino</option>
+                    <option value='Outro'>Outro</option>
                 </select>
                 <br />
-                Email:  <br /> <input type="text" name="email" maxlength="100" size="100" />
+                <b>Email:</b>  <br /> <input class="blue-grey lighten-5" type="text" name="email" maxlength="100" size="100" />
                 <br />
                 <br /> 
                 
                 
                 
-                Formação/Conhecimentos: <br /> 
+                <b>Formação/Conhecimentos:</b> <br />  
+                <textarea name="formacao" class="materialize-textarea blue-grey lighten-5" style="height: 250px;">
+Formação 1: Ensino Médio
+Status: Completo
+Instituição: UNIDAVI   Cidade: Rio do Sul - SC
+Data início: 01/01/2010   Data término: 31/12/2012
+
+Formação 2: Administração
+Status: Cursando
+Instituição: UNIDAVI   Cidade: Rio do Sul - SC
+Data início: 01/01/2015   Data término: -
+
+</textarea>
+                <br /><br />
+                
+                <!-- Será utilizado em outra atualização o trecho de código abaixo
                 Nome Formação: <input type="text" name="nome_formacao" maxlength="100" size="50" />
                 <br /> 
                 Status:  
@@ -121,22 +113,28 @@
                 <br />
                 <input type="submit" name="BtnCadastraFormacao" value="CadastrarFormacao"  />
                 <br /><br />
+                -->
                 
                 
-                
-                Atividades Complementares: <br /> <textarea name="atividades" rows="10" cols="100"></textarea>
+                <b>Atividades Complementares:
+                </b> <br /> 
+                <textarea name="atividades" class="materialize-textarea blue-grey lighten-5" style="height: 250px;"></textarea>
                 <br />
-                Outras Informações: <br /> <textarea name="outros" rows="5" cols="100"></textarea>
+                <b>Outras Informações:
+                </b> <br /> 
+                <textarea name="outros" class="materialize-textarea blue-grey lighten-5" style="height: 250px;"></textarea>
                 <br />
                 <br />
                 <div  >
-                    <input type="submit" name="BtnCadastra" value="Cadastrar"  />
+                    <input type="submit" class="btn btn-success" name="BtnCadastra" value="Cadastrar"  />
                     <a href="index.html" target="_parent">
-                        <button type="button" >Cancelar</button>
+                        <button class="btn red darken-4" type="button" >Cancelar</button>
                     </a>
                 </div>
             </form>
             
         </div>
+                <br />
+                <%@include file="templates/footer.html" %>
     </body>
 </html>

@@ -2,64 +2,58 @@
 <%@page import="fontes.ConexaoBanco"%>
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="br.edu.unidavi.empregabilidade.model.Vaga"%>
 <%
     if(request.getParameter("nome") != null){
-        String nome = request.getParameter("nome");
-        String descricao = request.getParameter("descricao");
-        String atividades = request.getParameter("atividades");
-        String requisitos = request.getParameter("requisitos");
-        String horario = request.getParameter("horario");
-        String salario = request.getParameter("salario");
-        String beneficios = request.getParameter("beneficios");
-        String cidade = request.getParameter("cidade");
-        
-        java.sql.ResultSet rs3 = ConexaoBanco.getConect().getDados("SELECT id_cidade FROM cidade WHERE nome = '"+cidade+"'");
-        rs3.next();
-        int idCidade = rs3.getInt(1);
         try{
-            
-            ConexaoBanco.getConect().setDados("INSERT INTO vaga(nome_vaga,descricao,atividades,requisitos,horario,salario,beneficios,id_pessoa,id_cidade) "
-             + "VALUES('"+nome+"','"+descricao+"','"+atividades+"','"+requisitos+"','"+horario+"','"+salario+"','"+beneficios+"',1,"+idCidade+")");
-            out.println("<script language= 'JavaScript'>");
-                out.println("location.href='index.html'");
-            out.println("</script>");
-        }catch(Exception e){
-            out.println("Erro ao incluir Currículo!");
-        }
+            Vaga vaga = new Vaga(request.getParameter("nome"), request.getParameter("descricao"), request.getParameter("atividades"), request.getParameter("requisitos"), 
+                    request.getParameter("horario"), request.getParameter("salario"), request.getParameter("beneficios"), request.getParameter("cidade"), 
+                    1);//ALTERAR AQUI PARA PEGAR O ID DA PESSOA QUE ESTÁ LOGADO
+            vaga.insereVaga();
+        }catch(Exception e){}
     }
 %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Inserir Vaga</title>
+        <title>Empregos Alto Vale - Inserir Vaga</title>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css" />
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
     </head>
     <body style="background-color: #cfd8dc;">
     <!body style="background-image: url('img/fundoAzul.jpg');">
         <br />
-        <div>
-            <div>
-                <br />
-                <img src="img/EmpregosAltoVale2.png" width="500">
+        <div class="container">
+            <div class="col l12 s12 center"> 
+                <img src="img/temos.png" width="300">
                 <h1 style="font-size: 36px;">Inserir Vaga</h1>
             </div>
-            <form name="CadastroUsuario" method="post">
+            <form name="CadastroVaga" method="post">
                 
                 <br />
-                Nome Vaga: <br />  <input type="text" name="nome" maxlength="100" size="100" />
+                <b>Cargo:</b> <br />  <input class="blue-grey lighten-5" type="text" name="nome" maxlength="100" size="100" />
                 <br />
-                Descrição: <br /> <textarea name="descricao" rows="10" cols="100"></textarea>
+                <b>Descrição:</b> <br /> <textarea name="descricao" class="materialize-textarea blue-grey lighten-5" style="height: 100px;"></textarea>
                 <br />
-                Atividades: <br /> <textarea name="atividades" rows="10" cols="100"></textarea>
+                <b>Atividades:</b> <br /> <textarea name="atividades" class="materialize-textarea blue-grey lighten-5" style="height: 100px;"></textarea>
                 <br />
-                Requisitos: <br /> <textarea name="requisitos" rows="5" cols="100"></textarea>
+                <b>Requisitos:</b> <br /> <textarea name="requisitos" class="materialize-textarea blue-grey lighten-5" style="height: 100px;"></textarea>
                 <br />
-                Horário: <br />  <input type="text" name="horario" maxlength="100" size="100" />
+                <b>Horário:</b> <br />  <input class="blue-grey lighten-5" type="text" name="horario" maxlength="100" size="100" />
                 <br />
-                Salário:  <br /> <input type="text" name="salario" maxlength="100" size="100" />
+                <b>Salário:</b>  <br /> <input class="blue-grey lighten-5" type="text" name="salario" maxlength="100" size="100" />
                 <br />
-                Cidade:  <br /> 
-                <select name='cidade'>
+                <b>Cidade:</b>  <br /> 
+                <select name='cidade' class="browser-default blue-grey lighten-5">
                     <%
                         java.sql.ResultSet rs = ConexaoBanco.getConect().getDados("SELECT nome FROM cidade");
                         while(rs.next()){
@@ -68,17 +62,19 @@
                     %>
                 </select>
                 <br />
-                Benefícios: <br /> <textarea name="beneficios" rows="5" cols="100"></textarea>
+                <b>Benefícios:</b> <br /> <textarea name="beneficios" class="materialize-textarea blue-grey lighten-5" style="height: 100px;"></textarea>
                 <br />
                 <br />
                 <div  >
-                    <input type="submit" name="BtnCadastra" value="Cadastrar"  />
+                    <input type="submit" class="btn btn-success" name="BtnCadastra" value="Cadastrar"  />
                     <a href="index.html" target="_parent">
-                        <button type="button" >Cancelar</button>
+                        <button class="btn red darken-4" type="button" >Cancelar</button>
                     </a>
                 </div>
             </form>
             
         </div>
+                <br />
+                <%@include file="templates/footer.html" %>
     </body>
 </html>

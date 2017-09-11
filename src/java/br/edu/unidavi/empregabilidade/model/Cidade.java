@@ -1,29 +1,91 @@
+
 package br.edu.unidavi.empregabilidade.model;
-
+import br.edu.unidavi.empregabilidade.util.ConexaoBanco;
+import java.sql.Connection;
+/**
+ *
+ * @author G1745 IRON
+ */
 public class Cidade {
-
-    private String est_sigla;
-    private String nome;
-
-    public Cidade(String est_sigla, String nome) {
-        this.est_sigla = est_sigla;
-        this.nome = nome;
+    private int idCidade = 1;
+    private String nome = "";
+    private String siglaEstado = "";
+    
+    public Cidade(){
+        idCidade = 1;
+        nome = "";
+        siglaEstado = "";
     }
-
-    public String getEst_sigla() {
-        return est_sigla;
+    
+    public Cidade(String nomeCidad,String siglaEstad){
+        this.nome = nomeCidad;
+        this.siglaEstado = siglaEstad;
     }
-
-    public void setEst_sigla(String est_sigla) {
-        this.est_sigla = est_sigla;
+    
+    public void setIdCidade(int idCid){
+        this.idCidade = idCid;
     }
-
-    public String getNome() {
+    public void setNomeCidade(String nomeCid){
+        this.nome = nomeCid;
+    }
+    public void setSiglaEstado(String sigla){
+        this.siglaEstado = sigla;
+    }
+    
+    
+    public int getIdCidade(){
+        return idCidade;
+    }
+    public String getNomeCidade(){
         return nome;
     }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String getSiglaEstado(){
+        return siglaEstado;
     }
-
+   
+    
+    public void insereCidade(){
+        try{
+            ConexaoBanco.getConect().setDados("INSERT INTO cidade(nome,sigla_estado) "
+            +"VALUES('"+nome+"','"+siglaEstado+"')");
+        }catch(Exception e){}
+    }
+    
+    public void updateCidade(){
+        try{
+            ConexaoBanco.getConect().setDados("UPDATE cidade SET nome = '"+nome+"',sigla_estado = '"+siglaEstado+"' "
+                    + "WHERE id_cidade = "+idCidade);
+        }catch(Exception e){}
+    }
+    
+    public void setCidadePorID(int idCidad){
+        try{
+            java.sql.ResultSet rs = ConexaoBanco.getConect().getDados(""
+                    + "SELECT * "
+                    + "FROM cidade "
+                    + "WHERE id_cidade = "+idCidad+"");
+            rs.next();
+            
+            this.idCidade = idCidad;
+            this.nome = rs.getString("nome");
+            this.siglaEstado = rs.getString("sigla_estado");
+            
+        }catch(Exception e){}
+    }
+    
+    public void setCidadePorNome(String nomeCidad){
+        try{
+            java.sql.ResultSet rs = ConexaoBanco.getConect().getDados(""
+                    + "SELECT * "
+                    + "FROM cidade "
+                    + "WHERE nome = "+nomeCidad+"");
+            rs.next();
+            
+            this.idCidade = rs.getInt("id_cidade");
+            this.nome = nomeCidad;
+            this.siglaEstado = rs.getString("sigla_estado");
+            
+        }catch(Exception e){}
+    }
+    
 }

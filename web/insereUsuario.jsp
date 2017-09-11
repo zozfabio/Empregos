@@ -30,38 +30,37 @@
     </head>
     <body style="background-color: #cfd8dc;">
         <div class="container">
-            <div>
-                <br />
-                <img src="img/EmpregosAltoVale2.png" width="500">
+            <div class="col l12 s12 center"> 
+                <img src="img/temos.png" width="300">
                 <h1 style="font-size: 36px;">Criar Usuário</h1>
             </div>
             <form name="CadastroUsuario" method="post">
-                Pessoa Física ou Jurídica?: 
-                <select name='fisicaJuridica' class="browser-default">
+                <b>Pessoa Física ou Jurídica?: </b>
+                <select name='fisicaJuridica' class="browser-default blue-grey lighten-5">
                     <option value='FISICA'>FISICA</option>
                     <option value='JURIDICA'>JURIDICA</option>
                 </select>
                 <br />
-                Nome: <input type="text" name="nome" maxlength="100" size="80" />
+                <b>Nome:</b> <input class="blue-grey lighten-5" type="text" name="nome" maxlength="100" size="80" />
                 <br />
-                Login: <input type="text" name="login" maxlength="100" size="80" />
+                <b>Login:</b> <input class="blue-grey lighten-5" type="text" name="login" maxlength="100" size="80" />
                 <br />
-                Senha: <input type="password" name="senha" maxlength="100" size="80" />
+                <b>Senha:</b> <input class="blue-grey lighten-5" type="password" name="senha" maxlength="100" size="80" />
                 <br />
-                CPF ou CNPJ: <input type="text" name="cpf_cnpj" maxlength="100" size="80" />
+                <b>CPF ou CNPJ:</b> <input class="blue-grey lighten-5" type="text" name="cpf_cnpj" maxlength="100" size="80" />
                 <br />
-                Telefone: <input type="text" name="telefone" maxlength="100" size="80" />
+                <b>Telefone:</b> <input class="blue-grey lighten-5" type="text" name="telefone" maxlength="100" size="80" />
                 <br />
-                Celular: <input type="text" name="celular" maxlength="100" size="80" />
+                <b>Celular:</b> <input class="blue-grey lighten-5" type="text" name="celular" maxlength="100" size="80" />
                 <br />
-                WhatsApp: <input type="text" name="whatsapp" maxlength="100" size="80" />
+                <b>WhatsApp:</b> <input class="blue-grey lighten-5" type="text" name="whatsapp" maxlength="100" size="80" />
                 <br />
-                Email: <input type="text" name="email" maxlength="100" size="80" />
+                <b>Email:</b> <input class="blue-grey lighten-5" type="text" name="email" maxlength="100" size="80" />
                 <br />
-                Endereço: <input type="text" name="endereco" maxlength="200" size="80" />
+                <b>Endereço:</b> <input class="blue-grey lighten-5" type="text" name="endereco" maxlength="200" size="80" />
                 <br />
-                Cidade: 
-                <select name='cidade' class="browser-default">
+                <b>Cidade:</b> 
+                <select name='cidade' class="browser-default blue-grey lighten-5">
                     <%
                         try{
                             java.sql.ResultSet rs = ConexaoBanco.getConect().getDados("SELECT nome FROM cidade");
